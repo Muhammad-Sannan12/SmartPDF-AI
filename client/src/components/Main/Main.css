@@ -1,9 +1,4 @@
-.main{
-    flex: 1;
-    min-height: 100vh;
-    padding-bottom: 15vh;
-    position: relative;
-}
+
 .main .navbar{
     display: flex;
     align-items: center;
@@ -66,13 +61,16 @@ background-clip: text;
 .main .card:hover{
     background-color: #dfe4ea;
 }
-.main_bottom{
-    position: absolute;
-bottom: 0;
-width: 100%;
-max-width: 900px;
-padding: 0px 20px;
-margin: auto;
+.main_bottom {
+    position: fixed; /* Changed from absolute */
+    bottom: 0;
+    left: 50%; /* Center it horizontally */
+    transform: translateX(-50%); /* Adjust for the left 50% shift */
+    width: 100%;
+    max-width: 900px;
+    padding: 0px 20px;
+    background-color: white; /* Give it a background so messages don't show through */
+    z-index: 10; /* Ensure it stays on top of messages */
 }
 .search_box {
   display: flex;
@@ -107,14 +105,7 @@ margin: auto;
   text-align: center;
   font-weight: 300;
 }
-.result {
-  padding: 0px 5%;
-  max-height: 70vh;
-  overflow-y: scroll;
-}
-.result::-webkit-scrollbar{
-  display: none;
-}
+
 .result_title{
   margin: 40px 0px;
   display: flex;
@@ -175,4 +166,113 @@ margin: auto;
   .search_box div{
     gap: 5px;
   }
+}
+
+/* Chat message container */
+.chat-message {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  margin: 15px 0;
+}
+
+/* User message (right side) */
+.chat-message.user {
+  flex-direction: row-reverse;
+}
+
+/* Bot message (left side) */
+.chat-message.bot {
+  flex-direction: row;
+}
+
+/* Profile images */
+.chat-message img {
+  width: 35px;
+  height: 35px;
+  border-radius: 50%;
+}
+
+/* Message bubble */
+.chat-message p {
+  max-width: 70%;
+  padding: 12px 16px;
+  border-radius: 15px;
+  font-size: 15px;
+  line-height: 1.4;
+}
+
+/* User bubble */
+.chat-message.user p {
+  background-color: #4a90e2;
+  color: white;
+  border-bottom-right-radius: 5px;
+}
+
+/* Bot bubble */
+.chat-message.bot p {
+  background-color: #f1f1f1;
+  color: #333;
+  border-bottom-left-radius: 5px;
+}
+
+/* Loader animation */
+/* .loader {
+  display: flex;
+  gap: 4px;
+  margin-top: 10px;
+}
+
+.loader hr {
+  width: 5px;
+  height: 15px;
+  border: none;
+  background-color: #888;
+  animation: blink 1s infinite;
+}
+
+.loader hr:nth-child(2) {
+  animation-delay: 0.2s;
+}
+.loader hr:nth-child(3) {
+  animation-delay: 0.4s;
+} */
+
+@keyframes blink {
+  0% { opacity: 0.2; }
+  50% { opacity: 1; }
+  100% { opacity: 0.2; }
+}
+.chat-wrapper {
+  max-width: 800px;
+  margin: auto;
+}/* Change this in your Main.css */
+.result {
+    padding: 20px;
+    max-width: 800px;
+    margin: auto;
+    /* Add enough padding to clear the height of your search_box + info text */
+    padding-bottom: 180px; 
+}
+
+/* Ensure the main container allows the whole page to scroll */
+.main {
+    flex: 1;
+    min-height: 100vh;
+    /* Remove padding-bottom: 15vh if it's no longer needed */
+    position: relative;
+}
+
+/* Scrollbar styling */
+.result::-webkit-scrollbar {
+  width: 6px;
+}
+
+.result::-webkit-scrollbar-thumb {
+  background: #888;
+  border-radius: 10px;
+}
+html {
+  scroll-behavior: smooth;
+  overflow-anchor: auto; /* Browser will try to stick to the bottom naturally */
 }

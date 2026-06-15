@@ -1,10 +1,8 @@
 import "./Sidebar.css";
 import { assets } from "../../assets/assets";
-import { useContext, useState } from "react";
-import { Context } from "../../context/Context";
-const Sidebar = () => {
+import { memo, useState } from "react";
+const Sidebar = ({ loadedChat, currentChatId, openChat, handleNewChat }) => {
   const [extended, setExtented] = useState(false);
-  const { onSent, prevPrompt, setRecentPrompt, newChat } = useContext(Context);
   return (
     <div className="sidebar">
       <div className="top">
@@ -14,21 +12,24 @@ const Sidebar = () => {
           src={assets.menu_icon}
           alt=""
         />
-        <div onClick={() => newChat()} className="new-chat">
+        <div onClick={handleNewChat} className="new-chat">
           <img src={assets.plus_icon} alt="" />
           {extended ? <p>New Chat</p> : null}
         </div>
         {extended ? (
           <div className="recent">
             <p className="recent-title">Recent</p>
-            {prevPrompt.map((item, index) => {
-              return (
-                <div className="recent-entry">
-                  <img src={assets.message_icon} alt="" />
-                  <p>{item.slice(0, 18)}...</p>
-                </div>
-              );
-            })}
+            {loadedChat.map((chat) => (
+              <div
+                key={chat._id}
+                onClick={() => openChat(chat._id)}
+                className={`history-item ${
+                  currentChatId === chat._id ? "active" : ""
+                }`}
+              >
+                {chat.title}
+              </div>
+            ))}
           </div>
         ) : null}
       </div>
@@ -50,4 +51,4 @@ const Sidebar = () => {
   );
 };
 
-export default Sidebar;
+export default memo(Sidebar);

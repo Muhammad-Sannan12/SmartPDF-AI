@@ -114,7 +114,7 @@ const Main = () => {
     let text = "";
     try {
       const res = await axios.post(
-        "http://localhost:5000/api/files/upload",
+        "https://smartpdf-ai-production.up.railway.app/api/files/upload",
         formData,
       );
       text = res.data.message;

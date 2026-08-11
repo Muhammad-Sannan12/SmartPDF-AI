@@ -2,13 +2,17 @@ import express from "express";
 import multer from "multer";
 import path from "path";
 import { uploadFile } from "../controllers/fileController.js";
-
+import os from "os";
 const router = express.Router();
 
 // multer setup
+// const storage = multer.diskStorage({
+//   destination: (req, file, cb) => {
+//     cb(null, "uploads/");
+//   },
 const storage = multer.diskStorage({
   destination: (req, file, cb) => {
-    cb(null, "uploads/");
+    cb(null, os.tmpdir());
   },
   filename: (req, file, cb) => {
     const ext = path.extname(file.originalname); // ".pdf" or ".docx"

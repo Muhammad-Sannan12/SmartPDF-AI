@@ -22,4 +22,9 @@ const filePath = req.file.path;
     console.error(error);
     res.status(500).json({ message: "Server error" });
   }
+  finally {
+  if (req.file?.path) {
+    await fs.unlink(req.file.path).catch(() => {});
+  }
+}
 };

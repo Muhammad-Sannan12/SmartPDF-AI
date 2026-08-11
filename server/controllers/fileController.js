@@ -1,6 +1,7 @@
 
 import { indexTheDocument } from "../rag/prepare.js";
 import { chat } from "../rag/chat.js";
+import fs from "fs/promises";
 
 export const uploadFile = async (req, res) => {
   try {

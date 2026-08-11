@@ -4,7 +4,7 @@ export const loadChats = async () => {
   const token = localStorage.getItem("token");
 
   const res = await axios.get(
-    "http://localhost:5000/api/chats/",
+    "smartpdf-ai.railway.internal/api/chats/",
     {
       headers: {
         "Content-Type": "application/json",
@@ -16,7 +16,7 @@ export const loadChats = async () => {
   return res.data;
 };
 export async function loginUser(email, password) {
-  const response = await fetch("http://localhost:5000/api/auth/login", {
+  const response = await fetch("smartpdf-ai.railway.internal/api/auth/login", {
     method: "POST",
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify({ email, password }),
@@ -35,7 +35,7 @@ export async function loginUser(email, password) {
 }
 export async function registerUser(username, email, password) {
   try {
-    const response = await fetch("http://localhost:5000/api/auth/register", {
+    const response = await fetch("smartpdf-ai.railway.internal/api/auth/register", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ username, email, password }),
@@ -52,7 +52,7 @@ export async function registerUser(username, email, password) {
 export const createChatInDB = async (title, firstMessage) => {
   const token = localStorage.getItem("token");
   const res = await axios.post(
-    "http://localhost:5000/api/chats",
+    "smartpdf-ai.railway.internal/api/chats",
     { title, firstMessage },
     {
       headers: {
@@ -67,7 +67,7 @@ export const createChatInDB = async (title, firstMessage) => {
 export const addMessageToDB = async (chatId, role, text) => {
   const token = localStorage.getItem("token");
   const res = await axios.post(
-    `http://localhost:5000/api/chats/${chatId}/message`,
+    `smartpdf-ai.railway.internal/api/chats/${chatId}/message`,
     { role, text },
     {
       headers: {
@@ -81,7 +81,7 @@ export const addMessageToDB = async (chatId, role, text) => {
 
 export const getSpecificChat = async (chatId) => {
   const token = localStorage.getItem("token");
-  const res = await axios.get(`http://localhost:5000/api/chats/${chatId}`, {
+  const res = await axios.get(`smartpdf-ai.railway.internal/api/chats/${chatId}`, {
     headers: {
       "Content-Type": "application/json",
       Authorization: `Bearer ${token}`,

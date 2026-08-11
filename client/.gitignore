@@ -24,5 +24,4 @@ dist-ssr
 dist/
 context/
 node_modules/
-src/components/
 .env
